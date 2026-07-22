@@ -74,7 +74,7 @@ public class SeatTest {
     seat.purchase();
 
     //then
-    assertEquals(SeatStatus.SOLD_OUT, seat.getStatus());
+    assertEquals(SeatStatus.SOLD, seat.getStatus());
   }
 
   @Test
