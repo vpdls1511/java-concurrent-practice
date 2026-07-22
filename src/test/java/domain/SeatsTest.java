@@ -3,9 +3,8 @@ package domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.rmi.NoSuchObjectException;
 import java.util.List;
-import javax.management.openmbean.KeyAlreadyExistsException;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +26,7 @@ public class SeatsTest {
 
   @Test
   @DisplayName("좌석 번호로 좌석을 조회할 수 있다.")
-  void canFindSeat() throws NoSuchObjectException {
+  void canFindSeat() {
     // given
     String seatNo = "A-01";
     Seat seat = Seat.create(seatNo);
@@ -68,7 +67,7 @@ public class SeatsTest {
     seats.add(Seat.create("A-01"));
 
     // when & then
-    assertThrows(NoSuchObjectException.class,
+    assertThrows(NoSuchElementException.class,
                  () -> seats.findSeatNo("A-02"));
 
   }
@@ -81,7 +80,7 @@ public class SeatsTest {
     seats.add(Seat.create("A-01"));
 
     // when & then
-    assertThrows(KeyAlreadyExistsException.class,
+    assertThrows(IllegalArgumentException.class,
                  () -> seats.add(Seat.create("A-01")));
 
   }

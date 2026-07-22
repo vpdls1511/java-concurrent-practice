@@ -1,10 +1,9 @@
 package domain;
 
-import java.rmi.NoSuchObjectException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.management.openmbean.KeyAlreadyExistsException;
+import java.util.NoSuchElementException;
 
 public class Seats {
 
@@ -15,7 +14,7 @@ public class Seats {
 
   public void add(Seat seat) {
     if (seats.containsKey(seat.getNo())) {
-      throw new KeyAlreadyExistsException("이미 존재하는 좌석 입니다.");
+      throw new IllegalArgumentException("이미 존재하는 좌석 입니다.");
     }
     this.seats.put(seat.getNo(), seat);
   }
@@ -24,9 +23,9 @@ public class Seats {
     return seats.size();
   }
 
-  public Seat findSeatNo(String seatNo) throws NoSuchObjectException {
+  public Seat findSeatNo(String seatNo) throws NoSuchElementException {
     if (!seats.containsKey(seatNo)) {
-      throw new NoSuchObjectException("존재하지 않는 좌석번호 입니다.");
+      throw new NoSuchElementException("존재하지 않는 좌석번호 입니다.");
     }
     return seats.get(seatNo);
   }
