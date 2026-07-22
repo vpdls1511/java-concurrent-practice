@@ -37,8 +37,8 @@ public class SeatTest {
   }
 
   @Test
-  @DisplayName("결제 대기중인 좌석은 구매할 수 없다.")
-  void alreadySeatProcess() {
+  @DisplayName("이미 선점된 좌석은 다시 선점할 수 없다.")
+  void alreadyReservedSeatCannotBeReservedAgain() {
     //given
     String seatNo = "A-01";
     Seat seat = Seat.create(seatNo);
