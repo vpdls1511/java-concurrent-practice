@@ -47,7 +47,7 @@ public class SeatsTest {
   void canGetAllSeats() {
     // given
     Seats seats = new Seats();
-    List<Seat> seatList = new ArrayList<>();
+    List<Seat> seatList;
 
     // when
     seats.add(Seat.create("A-01"));
