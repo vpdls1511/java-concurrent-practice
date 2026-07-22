@@ -5,7 +5,7 @@ public class Seat {
   private final String no;
   private SeatStatus status;
 
-  public Seat(String no) {
+  private Seat(String no) {
     this.no = no;
     this.status = SeatStatus.AVAILABLE;
   }
