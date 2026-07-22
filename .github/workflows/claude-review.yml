@@ -1,0 +1,67 @@
+name: Claude Auto Review
+
+# PR이 열리거나 새 커밋이 푸시되면 자동으로 코드 리뷰를 수행한다.
+#
+# [보안 노트 - fork PR로부터의 secret 유출 방지]
+# 1. pull_request 이벤트를 사용한다. GitHub는 fork에서 온 PR의 pull_request
+#    실행에는 secret을 아예 주입하지 않는다.
+# 2. pull_request_target 은 fork PR 코드에 secret이 노출될 수 있으므로 절대 쓰지 않는다.
+# 3. 아래 if 가드로 같은 레포 브랜치의 PR(=write 권한자만 만들 수 있음)에서만
+#    잡을 실행한다. fork PR은 잡 자체가 스킵된다.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+# 같은 PR에 새 커밋이 푸시되면 진행 중이던 이전 리뷰는 취소한다.
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  claude-review:
+    # [보안] fork에서 온 PR에서는 실행하지 않는다.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read        # 코드 읽기
+      pull-requests: write  # PR 리뷰 코멘트 작성
+      issues: read
+      id-token: write       # Claude GitHub App 토큰 교환(OIDC)에 필요
+      actions: read         # CI 결과 확인용
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Claude Code Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          # Claude Code Max 구독의 OAuth 토큰. 로컬에서 `claude setup-token` 으로 생성 후
+          # 레포 Settings > Secrets and variables > Actions 에 등록한다.
+          claude_code_oauth_token: ${{ secrets.ANTHROPIC_API_KEY }}
+          # 진행 상황을 체크박스 코멘트로 보여준다.
+          track_progress: true
+          # 커밋마다 새 코멘트를 달지 않고 하나의 코멘트를 갱신한다.
+          use_sticky_comment: true
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            이 PR을 코드 리뷰해줘. 리뷰는 한국어로 작성한다.
+
+            다음 관점으로 리뷰한다:
+            - 버그 및 잠재적 오류 (NPE, 경계값, 예외 처리 누락 등)
+            - 객체지향 설계 및 자바 컨벤션
+            - 가독성과 네이밍
+            - 보안 문제
+            - 테스트 커버리지
+
+            규칙:
+            - README.md 를 보고, 제약사항과 기능요구사항을 충족하는지 면밀히 검토한다.
+            - 명확한 문제만 지적하고, 사소한 스타일 트집은 잡지 않는다.
+            - 특정 코드 라인에 대한 지적은 인라인 코멘트로 남긴다.
+            - 마지막에 전체 요약과 승인/수정요청 의견을 남긴다.
+          claude_args: |
+            --model claude-opus-4-8
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
