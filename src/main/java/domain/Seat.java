@@ -6,6 +6,9 @@ public class Seat {
   private SeatStatus status;
 
   private Seat(String no) {
+    if (no == null || no.isBlank()) {
+      throw new IllegalArgumentException("좌석 번호는 비어있을 수 없습니다.");
+    }
     this.no = no;
     this.status = SeatStatus.AVAILABLE;
   }
