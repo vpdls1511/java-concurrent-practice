@@ -32,6 +32,6 @@ public class Seats {
   }
 
   public List<Seat> getAll() {
-    return seats.values().stream().toList();
+    return List.copyOf(seats.values());
   }
 }
