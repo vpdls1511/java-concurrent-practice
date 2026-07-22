@@ -77,8 +77,8 @@ public class SeatTest {
   }
 
   @Test
-  @DisplayName("이미 선점된 좌석은 예약할 수 없다.")
-  void alreadySeat() {
+  @DisplayName("판매 완료된(SOLD_OUT) 좌석은 다시 선점하거나 구매할 수 없다.")
+  void soldOutSeatCannotBeReservedOrPurchased() {
     //given
     String seatNo = "A-01";
     Seat seat = Seat.create(seatNo);
