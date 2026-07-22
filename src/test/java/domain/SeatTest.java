@@ -63,8 +63,9 @@ public class SeatTest {
   }
 
   @Test
-  @DisplayName("예약 완료된(SOLD_OUT) 좌석은 다시 선점하거나 구매할 수 없다.")
-  void completedSeatCannotBeReservedOrPurchased() {    //given
+  @DisplayName("선점된 좌석을 구매하면 판매 완료(SOLD_OUT) 상태가 된다.")
+  void purchaseReservedSeatThenSoldOut() {
+    //given
     String seatNo = "A-01";
     Seat seat = Seat.create(seatNo);
 
