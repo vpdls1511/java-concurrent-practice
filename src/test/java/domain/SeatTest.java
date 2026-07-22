@@ -80,4 +80,15 @@ public class SeatTest {
     assertThrows(IllegalStateException.class, seat::reserve);
     assertThrows(IllegalStateException.class, seat::purchase);
   }
+
+  @Test
+  @DisplayName("선점하지 않은 좌석은 구매할 수 없다.")
+  void cannotPurchaseSeat() {
+    //given
+    String seatNo = "A-01";
+    Seat seat = Seat.create(seatNo);
+
+    //when & then
+    assertThrows(IllegalStateException.class, seat::purchase);
+  }
 }
