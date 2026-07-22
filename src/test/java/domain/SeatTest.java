@@ -62,7 +62,7 @@ public class SeatTest {
     seat.payment();
 
     //then
-    assertEquals(SeatStatus.RESERVATION, seat.getStatus());
+    assertEquals(SeatStatus.RESERVE, seat.getStatus());
   }
 
   @Test

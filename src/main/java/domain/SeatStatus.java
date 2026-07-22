@@ -1,7 +1,7 @@
 package domain;
 
 public enum SeatStatus {
-  AVAILABLE, // 대기
-  PAYMENT_WAIT, // 결제 대기중
-  RESERVATION // 예약완료
+  AVAILABLE, // 예약 가능
+  PAYMENT_WAIT, // 결제 대기
+  RESERVE // 예약 완료
 }
