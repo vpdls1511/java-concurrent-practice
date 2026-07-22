@@ -23,6 +23,18 @@ public class SeatTest {
   }
 
   @Test
+  @DisplayName("좌석 번호는 비어잇을 수 없다.")
+  void cannotSeatNoIsBlank() {
+    //given
+    String seatNoIsNull = null;
+    String seatNoIsBlank = " ";
+
+    //when & then
+    assertThrows(IllegalArgumentException.class, () -> Seat.create(seatNoIsNull));
+    assertThrows(IllegalArgumentException.class, () -> Seat.create(seatNoIsBlank));
+  }
+
+  @Test
   @DisplayName("사용자는 좌석을 선점하면 결제 대기 상태가 된다.")
   void reserveSeatThenWaitingPayment() {
     //given
