@@ -45,7 +45,7 @@ public class SeatTest {
     seat.reserve();
 
     //then
-    assertEquals(SeatStatus.PAYMENT_WAIT, seat.getStatus());
+    assertEquals(SeatStatus.RESERVED, seat.getStatus());
   }
 
   @Test
@@ -74,7 +74,7 @@ public class SeatTest {
     seat.purchase();
 
     //then
-    assertEquals(SeatStatus.RESERVED, seat.getStatus());
+    assertEquals(SeatStatus.COMPLETE, seat.getStatus());
   }
 
   @Test

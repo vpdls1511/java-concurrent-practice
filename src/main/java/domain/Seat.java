@@ -29,13 +29,13 @@ public class Seat {
     if (!SeatStatus.AVAILABLE.equals(this.status)) {
       throw new IllegalStateException("이미 선점된 좌석 입니다.");
     }
-    this.status = SeatStatus.PAYMENT_WAIT;
+    this.status = SeatStatus.RESERVED;
   }
 
   public void purchase() {
-    if (!SeatStatus.PAYMENT_WAIT.equals(this.status)) {
+    if (!SeatStatus.RESERVED.equals(this.status)) {
       throw new IllegalStateException("선점한 좌석이 아닙니다.");
     }
-    this.status = SeatStatus.RESERVED;
+    this.status = SeatStatus.COMPLETE;
   }
 }
