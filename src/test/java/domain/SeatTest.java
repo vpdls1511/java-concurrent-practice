@@ -63,9 +63,8 @@ public class SeatTest {
   }
 
   @Test
-  @DisplayName("결제가 완료되면 좌석은 예약 상태가 된다.")
-  void reserveSeat() {
-    //given
+  @DisplayName("예약 완료된(SOLD_OUT) 좌석은 다시 선점하거나 구매할 수 없다.")
+  void completedSeatCannotBeReservedOrPurchased() {    //given
     String seatNo = "A-01";
     Seat seat = Seat.create(seatNo);
 
@@ -74,7 +73,7 @@ public class SeatTest {
     seat.purchase();
 
     //then
-    assertEquals(SeatStatus.COMPLETE, seat.getStatus());
+    assertEquals(SeatStatus.SOLD_OUT, seat.getStatus());
   }
 
   @Test

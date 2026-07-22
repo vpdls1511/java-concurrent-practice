@@ -36,6 +36,6 @@ public class Seat {
     if (!SeatStatus.RESERVED.equals(this.status)) {
       throw new IllegalStateException("선점한 좌석이 아닙니다.");
     }
-    this.status = SeatStatus.COMPLETE;
+    this.status = SeatStatus.SOLD_OUT;
   }
 }
