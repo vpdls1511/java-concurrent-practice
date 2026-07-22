@@ -23,11 +23,12 @@ public class Seats {
     return seats.size();
   }
 
-  public Seat findSeatNo(String seatNo) throws NoSuchElementException {
-    if (!seats.containsKey(seatNo)) {
+  public Seat findByNo(String seatNo) throws NoSuchElementException {
+    Seat seat = seats.get(seatNo);
+    if (seat == null) {
       throw new NoSuchElementException("존재하지 않는 좌석번호 입니다.");
     }
-    return seats.get(seatNo);
+    return seat;
   }
 
   public List<Seat> getAll() {

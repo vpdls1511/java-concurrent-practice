@@ -34,7 +34,7 @@ public class SeatsTest {
 
     // when
     seats.add(seat);
-    Seat existSeat = seats.findSeatNo(seatNo);
+    Seat existSeat = seats.findByNo(seatNo);
 
     // then
     assertEquals(seatNo, existSeat.getNo());
@@ -68,7 +68,7 @@ public class SeatsTest {
 
     // when & then
     assertThrows(NoSuchElementException.class,
-                 () -> seats.findSeatNo("A-02"));
+                 () -> seats.findByNo("A-02"));
 
   }
 
