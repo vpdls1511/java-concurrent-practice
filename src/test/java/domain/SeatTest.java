@@ -74,7 +74,7 @@ public class SeatTest {
     seat.purchase();
 
     //then
-    assertEquals(SeatStatus.RESERVE, seat.getStatus());
+    assertEquals(SeatStatus.RESERVED, seat.getStatus());
   }
 
   @Test

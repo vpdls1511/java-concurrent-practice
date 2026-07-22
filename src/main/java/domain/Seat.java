@@ -36,6 +36,6 @@ public class Seat {
     if (!SeatStatus.PAYMENT_WAIT.equals(this.status)) {
       throw new IllegalStateException("선점한 좌석이 아닙니다.");
     }
-    this.status = SeatStatus.RESERVE;
+    this.status = SeatStatus.RESERVED;
   }
 }
