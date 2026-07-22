@@ -10,12 +10,6 @@ public class Seat {
     this.status = SeatStatus.AVAILABLE;
   }
 
-  /**
-   * 좌석을 생성할 수 있다.
-   *
-   * @param no
-   * @return
-   */
   public static Seat create(String no) {
     return new Seat(no);
   }
