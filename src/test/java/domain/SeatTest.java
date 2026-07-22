@@ -59,7 +59,7 @@ public class SeatTest {
 
     //when
     seat.reserve();
-    seat.payment();
+    seat.purchase();
 
     //then
     assertEquals(SeatStatus.RESERVE, seat.getStatus());
@@ -74,10 +74,10 @@ public class SeatTest {
 
     //when
     seat.reserve();
-    seat.payment();
+    seat.purchase();
 
     //then
     assertThrows(IllegalStateException.class, seat::reserve);
-    assertThrows(IllegalStateException.class, seat::payment);
+    assertThrows(IllegalStateException.class, seat::purchase);
   }
 }

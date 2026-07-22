@@ -35,7 +35,7 @@ public class Seat {
     this.status = SeatStatus.PAYMENT_WAIT;
   }
 
-  public void payment() {
+  public void purchase() {
     if (!SeatStatus.PAYMENT_WAIT.equals(this.status)) {
       throw new IllegalStateException("선점한 좌석이 아닙니다.");
     }
