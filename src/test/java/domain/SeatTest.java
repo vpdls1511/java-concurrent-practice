@@ -23,7 +23,7 @@ public class SeatTest {
   }
 
   @Test
-  @DisplayName("좌석 번호는 비어잇을 수 없다.")
+  @DisplayName("좌석 번호는 비어있을 수 없다.")
   void cannotSeatNoIsBlank() {
     //given
     String seatNoIsNull = null;
@@ -78,7 +78,7 @@ public class SeatTest {
   }
 
   @Test
-  @DisplayName("이미 선정된 좌석은 예약할 수 없다.")
+  @DisplayName("이미 선점된 좌석은 예약할 수 없다.")
   void alreadySeat() {
     //given
     String seatNo = "A-01";
