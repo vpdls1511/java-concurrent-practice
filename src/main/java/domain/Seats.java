@@ -8,7 +8,7 @@ import javax.management.openmbean.KeyAlreadyExistsException;
 
 public class Seats {
 
-  private Map<String, Seat> seats = new HashMap<>();
+  private final Map<String, Seat> seats = new HashMap<>();
 
   public Seats() {
   }
