@@ -25,6 +25,19 @@ public class SeatsTest {
   }
 
   @Test
+  @DisplayName("N개의 좌석을 생성할 수 있다.")
+  void canInitializeSeat() {
+    //given
+    int seatSize = 10;
+
+    //when
+    Seats seats = Seats.initialize(seatSize);
+
+    //then
+    assertEquals(seatSize, seats.size());
+  }
+
+  @Test
   @DisplayName("좌석 번호로 좌석을 조회할 수 있다.")
   void canFindSeat() {
     // given
