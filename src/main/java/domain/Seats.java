@@ -4,12 +4,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.IntStream;
 
 public class Seats {
 
   private final Map<String, Seat> seats = new HashMap<>();
+  private static final String DEFAULT_SEAT_PREFIX = "A-";
 
   public Seats() {
+  }
+
+  public static Seats initialize(int size) {
+    Seats staticSeats = new Seats();
+
+    IntStream.range(1, size + 1)
+             .forEach(no -> staticSeats.add(Seat.create(DEFAULT_SEAT_PREFIX + no)));
+
+    return staticSeats;
   }
 
   public void add(Seat seat) {
